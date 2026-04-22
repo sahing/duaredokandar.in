@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>duaredokandar.in · official | दुआ रे दोकानदार</title>
+    <!-- Font Awesome 5 (free) for icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #fefcf5;
+            color: #1e2a2e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* container utility */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        /* header / navigation */
+        .site-header {
+            background: #ffffffdd;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #f0e9dd;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 0.8rem 0;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            background: linear-gradient(145deg, #b43f3f, #8a2f2f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: opacity 0.2s;
+        }
+        .logo a:hover { opacity: 0.8; }
+        .logo span { font-weight: 300; color: #4e3e3e; font-size: 1rem; display: block; line-height: 1.2; }
+
+        /* nav desktop */
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c3a40;
+            font-size: 1.1rem;
+            transition: color 0.2s, border-bottom 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover {
+            color: #b43f3f;
+            border-bottom-color: #b43f3f;
+        }
+
+        /* auth buttons special styling (login/register) */
+        .auth-link {
+            background: #b43f3f10;
+            padding: 0.5rem 1.2rem !important;
+            border-radius: 40px;
+            border-bottom: none !important;
+            font-weight: 600;
+        }
+        .auth-link i {
+            margin-right: 6px;
+        }
+        .auth-link.login-link {
+            background: #b43f3f;
+            color: white !important;
+            transition: 0.2s;
+        }
+        .auth-link.login-link:hover {
+            background: #8a2f2f;
+            transform: translateY(-2px);
+            color: white !important;
+        }
+        .auth-link.register-link {
+            background: #f3ede3;
+            color: #b43f3f !important;
+            border: 1px solid #e2d4c4;
+        }
+        .auth-link.register-link:hover {
+            background: #ffe6db;
+            border-color: #b43f3f;
+            transform: translateY(-2px);
+        }
+        .nav-links .auth-link {
+            border-bottom: none;
+            padding-bottom: 0.5rem;
+        }
+
+        /* mobile menu button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 1px solid #e2dcd0;
+            font-size: 1.8rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 12px;
+            color: #4e3e3e;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .menu-toggle:hover {
+            background: #f5efe6;
+        }
+
+        /* hero */
+        .hero {
+            background: linear-gradient(135deg, #fcf9f2 0%, #f3ede3 100%);
+            border-bottom: 1px solid #e8dfd1;
+        }
+        .hero .container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 3rem 0;
+        }
+        .hero-content {
+            flex: 1 1 350px;
+        }
+        .hero-content h1 {
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: #1f2a2e;
+        }
+        .hero-highlight {
+            color: #b43f3f;
+            background: #ffeae3;
+            padding: 0 0.3rem;
+            display: inline-block;
+        }
+        .hero-content p {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 2rem;
+            color: #42545c;
+            max-width: 550px;
+        }
+        .btn {
+            display: inline-block;
+            background: #b43f3f;
+            color: white;
+            font-weight: 600;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: 0.25s;
+            border: 2px solid #b43f3f;
+            box-shadow: 0 8px 18px rgba(180,63,63,0.15);
+        }
+        .btn:hover {
+            background: #8f2f2f;
+            border-color: #8f2f2f;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(180,63,63,0.25);
+        }
+        /* hero extra buttons group */
+        .hero-buttons-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #b43f3f;
+            color: #b43f3f;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: #b43f3f;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .hero-image {
+            flex: 1 1 350px;
+            text-align: center;
+        }
+        .hero-image svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 12px 18px rgba(0,0,0,0.06));
+        }
+
+        /* section headings */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1f2a2e;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #b43f3f;
+            margin-top: 6px;
+            border-radius: 4px;
+        }
+        .text-center { text-align: center; }
+        .text-center .section-title:after { margin-left: auto; margin-right: auto; }
+
+        /* services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .service-card {
+            background: white;
+            border-radius: 32px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #f1eae0;
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 35px -12px rgba(180,63,63,0.15);
+            border-color: #ffe2d1;
+        }
+        .service-icon {
+            font-size: 3rem;
+            color: #b43f3f;
+            margin-bottom: 1.2rem;
+        }
+        .service-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .service-card p { color: #4c5c64; }
+
+        /* about section */
+        .about {
+            background: #fffbf7;
+        }
+        .about-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4rem;
+        }
+        .about-text {
+            flex: 2 1 300px;
+        }
+        .about-text h2 { font-size: 2.3rem; margin-bottom: 1.2rem; }
+        .about-text p { margin: 1.2rem 0; color: #2f4049; font-size: 1.15rem; }
+        .about-highlight {
+            background: #b43f3f0c;
+            padding: 1.5rem;
+            border-radius: 2rem;
+            border-left: 6px solid #b43f3f;
+        }
+        .signature {
+            font-style: italic;
+            margin-top: 0.8rem;
+            color: #3b2e2a;
+        }
+        .about-stats {
+            flex: 1 1 180px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+        .stat-item {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 20px #f0e4d8;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #b43f3f;
+            line-height: 1;
+        }
+        .stat-label { font-size: 1.1rem; color: #384950; }
+
+        /* UPI payment section */
+        .upi-section {
+            background: #fff5ef;
+            border-radius: 2rem;
+            margin: 2rem 0 1rem;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid #ffe0ce;
+        }
+        .upi-grid {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .qr-box {
+            text-align: center;
+            background: white;
+            padding: 1rem;
+            border-radius: 28px;
+            box-shadow: 0 12px 20px rgba(0,0,0,0.05);
+        }
+        .qr-box img {
+            width: 170px;
+            height: 170px;
+            border-radius: 24px;
+        }
+        .upi-details {
+            flex: 1;
+            min-width: 200px;
+        }
+        .upi-details h3 {
+            font-size: 1.8rem;
+            color: #b43f3f;
+            margin-bottom: 0.5rem;
+        }
+        .upi-id-card {
+            background: #1e2a2e;
+            color: #f9e0cf;
+            padding: 0.7rem 1.2rem;
+            border-radius: 60px;
+            display: inline-block;
+            font-family: monospace;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            margin: 1rem 0;
+        }
+        .copy-upi {
+            background: #b43f3f20;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-left: 10px;
+            transition: 0.2s;
+        }
+        .copy-upi:hover {
+            background: #b43f3f;
+            color: white;
+        }
+
+        /* contact section */
+        .contact {
+            background: #faf6f0;
+        }
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        .contact-info {
+            flex: 1 1 260px;
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 10px 20px #ece1d3;
+        }
+        .contact-info h3 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.4rem 0;
+            font-size: 1.15rem;
+            flex-wrap: wrap;
+        }
+        .info-line i {
+            width: 40px;
+            height: 40px;
+            background: #f7e8de;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #b43f3f;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .info-line a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .info-line a:hover {
+            text-decoration: underline;
+        }
+        .wa-badge {
+            background: #f0e4d8;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #4d3333;
+            white-space: nowrap;
+        }
+        .contact-form {
+            flex: 3 1 360px;
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 10px 20px #ece1d3;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1.5px solid #e6dbcf;
+            border-radius: 40px;
+            font-size: 1rem;
+            transition: 0.2s;
+            background: #fdfaf7;
+        }
+        textarea {
+            border-radius: 30px;
+            resize: vertical;
+            min-height: 120px;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #b43f3f;
+            box-shadow: 0 0 0 4px #fadcd2;
+        }
+        .submit-btn {
+            background: #b43f3f;
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .submit-btn:hover {
+            background: #8a2f2f;
+        }
+
+        /* footer */
+        .footer {
+            background: #1e2a2e;
+            color: #ddcec1;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid #3f4d54;
+        }
+        .footer a {
+            color: #f0b8a7;
+            text-decoration: none;
+        }
+        .footer a:hover { text-decoration: underline; }
+
+        /* TERMS PAGE (toggle view) */
+        #terms-page {
+            background: #fefcf5;
+            padding: 2rem 0;
+            min-height: 70vh;
+        }
+        .terms-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.05);
+            margin: 1rem 0;
+        }
+        .terms-card h2 {
+            color: #b43f3f;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+        .terms-card p, .terms-card li {
+            color: #2f4049;
+            line-height: 1.6;
+        }
+        .back-home-btn {
+            background: #b43f3f;
+            color: white;
+            border: none;
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        /* responsive */
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0.8rem;
+                background: white;
+                padding: 1.5rem 1rem;
+                margin-top: 1rem;
+                border-radius: 32px;
+                box-shadow: 0 12px 25px rgba(0,0,0,0.05);
+                border: 1px solid #f0e1d2;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .nav-links li {
+                width: 100%;
+            }
+            .nav-links a {
+                display: block;
+                padding: 0.8rem 1.2rem;
+                background: #fcf7f2;
+                border-radius: 60px;
+                border: none;
+                text-align: center;
+            }
+            .hero .container {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+            .hero-buttons-group {
+                justify-content: center;
+            }
+            .section-title:after { margin-left: auto; margin-right: auto; }
+            .about-grid { flex-direction: column; gap: 2rem; }
+            .upi-grid { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="#" onclick="showMainContent(); return false;">duaredokandar<span>.in</span></a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="menu"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" onclick="showMainContent(); return false;">Home</a></li>
+                <li><a href="#" onclick="showMainContent(); document.getElementById('services').scrollIntoView({behavior:'smooth'}); return false;">Services</a></li>
+                <li><a href="#" onclick="showMainContent(); document.getElementById('about').scrollIntoView({behavior:'smooth'}); return false;">About</a></li>
+                <li><a href="#" onclick="showMainContent(); document.getElementById('contact').scrollIntoView({behavior:'smooth'}); return false;">Contact</a></li>
+                <li><a href="https://app.duaredokandar.in/login" class="auth-link login-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="https://app.duaredokandar.in/register" class="auth-link register-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-user-plus"></i> Register</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT WRAPPER (visible by default) -->
+    <div id="main-content">
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Welcome to <span class="hero-highlight">Dua Re Dokandar</span></h1>
+                    <p>Your trusted local shop for fresh goods, traditional spices, and daily essentials — now online.</p>
+                    <!-- Easy login & register buttons in hero section -->
+                    <div class="hero-buttons-group">
+                        <a href="#contact" class="btn">Order now <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+                        <a href="https://app.duaredokandar.in/login" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fas fa-sign-in-alt"></i> Login</a>
+                        <a href="https://app.duaredokandar.in/register" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fas fa-user-plus"></i> Register</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <svg width="400" height="280" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="50" y="160" width="70" height="100" rx="12" fill="#b43f3f" fill-opacity="0.25" stroke="#b43f3f" stroke-width="2" />
+                        <rect x="150" y="130" width="70" height="130" rx="12" fill="#b43f3f" fill-opacity="0.3" stroke="#b43f3f" stroke-width="2" />
+                        <rect x="250" y="100" width="70" height="160" rx="12" fill="#b43f3f" fill-opacity="0.4" stroke="#b43f3f" stroke-width="2" />
+                        <circle cx="120" cy="80" r="28" fill="#F9D7C0" stroke="#b43f3f" stroke-width="2" />
+                        <circle cx="280" cy="60" r="20" fill="#F9D7C0" stroke="#b43f3f" stroke-width="2" />
+                        <path d="M340 220 L360 260 L320 260 L340 220Z" fill="#CCAFA5" stroke="#8f5e4c" stroke-width="2" />
+                        <rect x="60" y="230" width="280" height="14" rx="7" fill="#D6B9A2" />
+                        <text x="50" y="270" font-family="system-ui" font-weight="500" fill="#4e3e3e" font-size="18">दुआ रे दोकानदार</text>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title">Our offerings</h2>
+                    <p style="color: #5b6e78; max-width: 600px; margin: 1rem auto 0;">Fresh from our dokandar to your doorstep</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card"><i class="fas fa-apple-alt service-icon"></i><h3>Fresh Grocery</h3><p>Fruits, vegetables, and daily essentials sourced directly from local farmers.</p></div>
+                    <div class="service-card"><i class="fas fa-mortar-pestle service-icon"></i><h3>Spices & Masala</h3><p>Authentic spice blends and traditional condiments for your kitchen.</p></div>
+                    <div class="service-card"><i class="fas fa-gift service-icon"></i><h3>Gift Boxes</h3><p>Special thalis and gift packs for festivals and celebrations.</p></div>
+                    <div class="service-card"><i class="fas fa-truck service-icon"></i><h3>Home delivery</h3><p>Fast and free delivery in the neighbourhood — just call or WhatsApp.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container about-grid">
+                <div class="about-text">
+                    <h2 class="section-title" style="font-size:2.2rem;">Dua Re Dokandar</h2>
+                    <div class="about-highlight"><p><strong>“Dua”</strong> means prayer, <strong>“Dokandar”</strong> means shopkeeper — we blend tradition with trust. Since 1985, our family-run shop has been a cornerstore for quality and warmth.</p><p class="signature">— MD Lalbabu, proprietor</p></div>
+                    <p>We believe in personal touch: every rice grain, every spice is handpicked. Now we bring the same care to our website, so you can order from the same trusted dokandar wherever you are.</p>
+                </div>
+                <div class="about-stats"><div class="stat-item"><div class="stat-number">39+</div><div class="stat-label">years serving</div></div><div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">fresh arrival</div></div><div class="stat-item"><div class="stat-number">100%</div><div class="stat-label">swadeshi</div></div></div>
+            </div>
+        </section>
+
+        <!-- UPI QR CODE SECTION with sahin@ybl -->
+        <div class="container">
+            <div class="upi-section">
+                <div class="upi-grid">
+                    <div class="qr-box">
+                        <!-- QR code generated via quickchart for UPI: sahin@ybl -->
+                        <img src="https://quickchart.io/qr?text=upi%3A%2F%2Fpay%3Fpa%3Dsahin%40ybl%26pn%3Dduaredokandar%26cu%3DINR&size=200&margin=2" alt="UPI QR Code sahin@ybl">
+                        <p style="margin-top: 8px;"><i class="fas fa-qrcode"></i> Scan & Pay</p>
+                    </div>
+                    <div class="upi-details">
+                        <h3><i class="fas fa-rupee-sign"></i> Support our dokandar</h3>
+                        <p>Pay directly via UPI – fast & secure</p>
+                        <div class="upi-id-card">
+                            <strong>📱 UPI ID : sahin@ybl</strong>
+                            <button class="copy-upi" id="copyUpiBtn" onclick="copyUpiId()"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <p style="font-size:0.95rem;">Scan QR or use UPI ID to pay. Your support keeps our local shop thriving!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="text-center"><h2 class="section-title">Talk to dokandar</h2><p style="margin-bottom: 1rem;">We reply within a few hours, usually faster than chai time ☕</p></div>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>📍 duaredokandar.in</h3>
+                        <div class="info-line"><i class="fas fa-map-marker-alt"></i> Janaseba Mudi O Vandar, Goshaipur Bajar, PS Deganga, Dist North 24 Parganas, PIN 743423, West Bengal</div>
+                        <div class="info-line"><i class="fas fa-phone-alt"></i> +91 90910 90858</div>
+                        <div class="info-line"><i class="fas fa-envelope"></i> info@duaredokandar.in</div>
+                        <div class="info-line"><i class="fab fa-whatsapp"></i><a href="https://wa.me/919091090858?text=hiduaredokanda" target="_blank">+91 90910 90858</a><span class="wa-badge">send "hiduaredokanda"</span></div>
+                        <div style="margin-top: 2rem;"><i class="fab fa-facebook" style="font-size: 2rem; margin-right: 1rem; color:#b43f3f;"></i><i class="fab fa-instagram" style="font-size: 2rem; color:#b43f3f;"></i></div>
+                    </div>
+                    <div class="contact-form">
+                        <h3 style="font-size: 1.8rem; margin-bottom: 1.2rem;">पूछताछ करें</h3>
+                        <form id="quickForm" onsubmit="event.preventDefault(); alert('धन्यवाद! (demo form) — हम जल्द संपर्क करेंगे / We’ll reach out soon.');">
+                            <div class="form-group"><input type="text" placeholder="Your name" required></div>
+                            <div class="form-group"><input type="email" placeholder="Email address" required></div>
+                            <div class="form-group"><textarea placeholder="What are you looking for?"></textarea></div>
+                            <button type="submit" class="submit-btn">Send message <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- TERMS & CONDITIONS PAGE (hidden initially) -->
+    <div id="terms-page" style="display: none;">
+        <div class="container">
+            <button class="back-home-btn" onclick="showMainContent()"><i class="fas fa-arrow-left"></i> Back to Home</button>
+            <div class="terms-card">
+                <h1 style="color:#b43f3f;">📜 Terms & Conditions</h1>
+                <p><strong>Last updated:</strong> April 2025</p>
+                <h2>1. Introduction</h2>
+                <p>Welcome to duaredokandar.in. By accessing our website and services, you agree to comply with these Terms & Conditions. "Dua Re Dokandar" is a proprietary local shop brand owned and operated by MD Lalbabu.</p>
+                <h2>2. Use of Website</h2>
+                <p>You agree to use our website for lawful purposes only. You must not misuse the platform for any fraudulent activities. All product information, pricing, and availability are subject to change without notice.</p>
+                <h2>3. Orders & Payments</h2>
+                <p>Orders placed via WhatsApp, phone, or contact form are confirmed by our team. Payments can be made via cash on delivery or UPI (sahin@ybl). We reserve the right to cancel any order due to stock unavailability.</p>
+                <h2>4. Delivery & Returns</h2>
+                <p>We offer free local delivery within Goshaipur & nearby areas. Returns are accepted within 24 hours for damaged/fresh produce issues. Please contact +91 90910 90858.</p>
+                <h2>5. Account Registration</h2>
+                <p>You may register via our app at <a href="https://app.duaredokandar.in/register" target="_blank">app.duaredokandar.in</a>. You are responsible for maintaining confidentiality of your login credentials.</p>
+                <h2>6. Limitation of Liability</h2>
+                <p>duaredokandar.in shall not be liable for indirect damages arising from the use of our products or services beyond the order value.</p>
+                <h2>7. Governing Law</h2>
+                <p>These terms are governed by the laws of West Bengal, India. Any disputes will be subject to the jurisdiction of local courts in North 24 Parganas.</p>
+                <h2>8. Contact Us</h2>
+                <p>For any questions, email info@duaredokandar.in or call +91 90910 90858.</p>
+                <p style="margin-top: 1.5rem;"><i class="fas fa-store"></i> — दुआ रे दोकानदार — serving with prayers since 1985</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 duaredokandar.in — responsive, real, relatable.</p>
+            <p style="margin-top: 0.8rem; font-size: 0.9rem;">
+                Crafted with <i class="fas fa-heart" style="color: #f0a58b;"></i> for the neighbourhood &nbsp;|&nbsp;
+                <a href="#" onclick="showTermsPage(); return false;" style="color:#f0b8a7;"><i class="fas fa-file-contract"></i> Terms & Conditions</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // toggle mobile menu
+        const toggleBtn = document.getElementById('menuToggle');
+        const nav = document.getElementById('navLinks');
+        if(toggleBtn) {
+            toggleBtn.addEventListener('click', () => { nav.classList.toggle('show'); });
+        }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (nav.classList.contains('show')) nav.classList.remove('show');
+            });
+        });
+
+        // Page switching: main content vs terms page
+        const mainContentDiv = document.getElementById('main-content');
+        const termsPageDiv = document.getElementById('terms-page');
+
+        function showMainContent() {
+            mainContentDiv.style.display = 'block';
+            termsPageDiv.style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showTermsPage() {
+            mainContentDiv.style.display = 'none';
+            termsPageDiv.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Make nav links (Home, Services, About, Contact) always show main content and scroll
+        const homeLink = document.querySelector('.nav-links li:first-child a');
+        const servicesNav = document.querySelector('.nav-links li:nth-child(2) a');
+        const aboutNav = document.querySelector('.nav-links li:nth-child(3) a');
+        const contactNav = document.querySelector('.nav-links li:nth-child(4) a');
+        if(homeLink) homeLink.onclick = (e) => { e.preventDefault(); showMainContent(); window.scrollTo({top:0, behavior:'smooth'}); };
+        if(servicesNav) servicesNav.onclick = (e) => { e.preventDefault(); showMainContent(); setTimeout(()=>{document.getElementById('services').scrollIntoView({behavior:'smooth'});},50); };
+        if(aboutNav) aboutNav.onclick = (e) => { e.preventDefault(); showMainContent(); setTimeout(()=>{document.getElementById('about').scrollIntoView({behavior:'smooth'});},50); };
+        if(contactNav) contactNav.onclick = (e) => { e.preventDefault(); showMainContent(); setTimeout(()=>{document.getElementById('contact').scrollIntoView({behavior:'smooth'});},50); };
+        
+        // logo click reset main
+        const logoAnchor = document.querySelector('.logo a');
+        if(logoAnchor) logoAnchor.onclick = (e) => { e.preventDefault(); showMainContent(); window.scrollTo({top:0, behavior:'smooth'}); };
+
+        // copy UPI ID function
+        window.copyUpiId = function() {
+            const upiText = "sahin@ybl";
+            navigator.clipboard.writeText(upiText).then(() => {
+                const btn = document.getElementById('copyUpiBtn');
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => { btn.innerHTML = originalHtml; }, 1500);
+            }).catch(() => alert("Manual copy: sahin@ybl"));
+        };
+        
+        console.log("✅ Hero login/register buttons added • UPI QR with sahin@ybl • Terms page ready");
+    </script>
+</body>
+</html>
